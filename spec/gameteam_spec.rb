@@ -39,4 +39,9 @@ RSpec.describe GameTeam do
     expect(@game_team.giveaways).to eq(17)
     expect(@game_team.takeaways).to eq(7)
   end
+
+  it "can create a GameTeam from CSV" do
+    new_game_teams = GameTeam.create_from_csv("./data/game_teams.csv")
+    expect(new_game_teams).to eq([])
+  end
 end

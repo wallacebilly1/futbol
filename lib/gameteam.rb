@@ -1,3 +1,5 @@
+require "csv"
+
 class GameTeam
   attr_reader :game_id, :team_id, :hoa, :result, :settled_in, :head_coach, :goals, :shots, :tackles, :pim, :powerPlayOpportunities, :powerPlayGoals, :faceOffWinPercentage, :giveaways, :takeaways
 
@@ -17,6 +19,30 @@ class GameTeam
     @faceOffWinPercentage = game_team_attrs[:faceOffWinPercentage]
     @giveaways = game_team_attrs[:giveaways]
     @takeaways = game_team_attrs[:takeaways]
+  end
+
+  def self.create_from_csv(game_teams_path)
+    game_teams = []
+    CSV.foreach(game_teams_path, headers: true, converters: :all) do |row|
+      attrs = { game_id: row["game_id"],
+    team_id: row["team_id"],
+    hoa: row["HoA"],
+    result: row["result"],
+    settled_in: row["settled_in"],
+    head_coach: row["head_coach"],
+    goals: row["goals"],
+    shots: row["shots"],
+    tackles: row["tackles"],
+    pim: row["pim"],
+    powerPlayOpportunities: row["powerPlayOpportunities"],
+    powerPlayGoals: row["powerPlayGoals"],
+    faceOffWinPercentage: row["faceOffWinPercentage"],
+    giveaways: row["giveaways"],
+    takeaways: row["takeaways"] }
+
+    game_teams << GameTeam.new(attrs)
+    end
+    game_teams
   end
 
 end
