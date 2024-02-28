@@ -1,22 +1,13 @@
+require './lib/team'
+require './lib/gameteam'
+require './lib/game'
+
 class StatTracker
-   
-    # self.from_csv({
-    #     games: './data/games.csv',
-    #     teams: './data/teams.csv',
-    #     game_teams: './data/game_teams.csv'
-    # })
 
     def self.from_csv(locations)
-        # if the key is games
-            # game.create_from_csv
-        # if the key is teams
-            # team.create_from_csv(location[:teams])
-        # if the key is gameteam
-            # gameteam.create_from_csv
-
-        # locations[:games] 
-        # locations[:teams]
-        # locations[:game_teams_path]
+        team_data = Team.create_from_csv(locations[:teams])
+        #p GameTeam.create_from_csv(locations[:game_teams])
+        game_data = Game.create_from_csv(locations[:games])
     end
     
 end
