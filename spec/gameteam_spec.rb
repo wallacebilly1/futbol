@@ -21,7 +21,7 @@ RSpec.describe GameTeam do
     @game_team = GameTeam.new(attrs)
   end
 
-  it 'can make GameTeam' do
+  it 'exists and has attributes' do
     expect(@game_team).to be_a(GameTeam)
     expect(game_id).to eq(2_012_030_221)
     expect(team_id).to eq(3)
