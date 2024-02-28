@@ -5,9 +5,9 @@ RSpec.describe GameTeam do
   before(:each) do
     attrs = { game_id: 2_012_030_221,
     team_id: 3,
-    HoA: away,
-    result: LOSS,
-    settled_in: OT,
+    HoA: "away",
+    result: "LOSS",
+    settled_in: "OT",
     head_coach: 'John Tortorella',
     goals: 2,
     shots: 8,
@@ -23,20 +23,20 @@ RSpec.describe GameTeam do
 
   it 'exists and has attributes' do
     expect(@game_team).to be_a(GameTeam)
-    expect(game_id).to eq(2_012_030_221)
-    expect(team_id).to eq(3)
-    expect(HoA).to eq(away)
-    expect(result).to eq(LOSS)
-    expect(settled_in).to eq(OT)
-    expect(head_coach).to eq('John Tortorella')
-    expect(goals).to eq(2)
-    expect(shots).to eq(8)
-    expect(tackles).to eq(44)
-    expect(pim).to eq(8)
-    expect(powerPlayOpportunities).to eq(3)
-    expect(powerPlayGoals).to eq(0)
-    expect(faceOffWinPercentage).to eq(44.8)
-    expect(giveaways).to eq(17)
-    expect(takeaways).to eq(7)
+    expect(@game_team.game_id).to eq(2_012_030_221)
+    expect(@game_team.team_id).to eq(3)
+    expect(@game_team.HoA).to eq(away)
+    expect(@game_team.result).to eq(LOSS)
+    expect(@game_team.settled_in).to eq(OT)
+    expect(@game_team.head_coach).to eq('John Tortorella')
+    expect(@game_team.goals).to eq(2)
+    expect(@game_team.shots).to eq(8)
+    expect(@game_team.tackles).to eq(44)
+    expect(@game_team.pim).to eq(8)
+    expect(@game_team.powerPlayOpportunities).to eq(3)
+    expect(@game_team.powerPlayGoals).to eq(0)
+    expect(@game_team.faceOffWinPercentage).to eq(44.8)
+    expect(@game_team.giveaways).to eq(17)
+    expect(@game_team.takeaways).to eq(7)
   end
 end
