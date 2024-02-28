@@ -42,6 +42,23 @@ RSpec.describe GameTeam do
 
   it "can create a GameTeam from CSV" do
     new_game_teams = GameTeam.create_from_csv("./data/game_teams.csv")
-    expect(new_game_teams).to eq([])
+    starting_game_team = new_game_teams.first
+    expect(starting_game_team).to be_a(GameTeam)
+    expect(starting_game_team.game_id).to eq(2_012_030_221)
+    expect(starting_game_team.team_id).to eq(3)
+    expect(starting_game_team.hoa).to eq("away")
+    expect(starting_game_team.result).to eq("LOSS")
+    expect(starting_game_team.settled_in).to eq("OT")
+    expect(starting_game_team.head_coach).to eq('John Tortorella')
+    expect(starting_game_team.goals).to eq(2)
+    expect(starting_game_team.shots).to eq(8)
+    expect(starting_game_team.tackles).to eq(44)
+    expect(starting_game_team.pim).to eq(8)
+    expect(starting_game_team.powerPlayOpportunities).to eq(3)
+    expect(starting_game_team.powerPlayGoals).to eq(0)
+    expect(starting_game_team.faceOffWinPercentage).to eq(44.8)
+    expect(starting_game_team.giveaways).to eq(17)
+    expect(starting_game_team.takeaways).to eq(7)
+
   end
 end
