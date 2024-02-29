@@ -44,4 +44,33 @@ class StatTracker
     (tie_counter / self.games.length.to_f).round(2) # 1517 / 7441
   end
 
+  def highest_scoring_visitor
+    array = Array.new
+    games_played = 0
+    score_counter = 0
+
+    self.teams.each do |team|
+      self.games.each do |game|
+        if team.id == game.away_team_id
+          games_played += 1
+          score_counter += game.away_goals
+        end
+      end
+
+      data = {
+        team_id: team.id,
+        team_name: team.name,
+        games_played: games_played,
+        score_counter: score_counter,
+        avg_score_pg: (score_counter / games_played.to_f).round(2)
+      }
+
+      array << data
+      games_played = 0
+      score_counter = 0      
+    end
+    
+    p array
+  end
+
 end
