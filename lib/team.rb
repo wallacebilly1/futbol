@@ -19,4 +19,11 @@ class Team
     end
     teams
   end
+
+  def self.highest_scoring_visitor
+  end
+
+  def self.lowest_scoring_visitor
+  end
+
 end
