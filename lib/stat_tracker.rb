@@ -45,9 +45,10 @@ class StatTracker
   end
 
   def highest_scoring_visitor
-    array = Array.new
+    visiting_team = String.new
     games_played = 0
     score_counter = 0
+    score_pg = 0
 
     self.teams.each do |team|
       self.games.each do |game|
@@ -57,20 +58,47 @@ class StatTracker
         end
       end
 
-      data = {
-        team_id: team.id,
-        team_name: team.name,
-        games_played: games_played,
-        score_counter: score_counter,
-        avg_score_pg: (score_counter / games_played.to_f).round(2)
-      }
+      avg_score_pg = (score_counter / games_played.to_f).round(4)
 
-      array << data
+      if avg_score_pg > score_pg
+        visiting_team = team.name
+        score_pg = avg_score_pg
+      end
+
       games_played = 0
       score_counter = 0      
     end
-    
-    p array
+
+    p visiting_team
   end
+
+  def lowest_scoring_visitor
+    visiting_team = String.new
+    games_played = 0
+    score_counter = 0
+    score_pg = 0
+
+    self.teams.each do |team|
+      self.games.each do |game|
+        if team.id == game.away_team_id
+          games_played += 1
+          score_counter += game.away_goals
+        end
+      end
+
+      avg_score_pg = (score_counter / games_played.to_f).round(4)
+
+      if avg_score_pg <= score_pg
+        visiting_team = team.name
+        score_pg = avg_score_pg
+      end
+
+      games_played = 0
+      score_counter = 0      
+    end
+
+    p visiting_team
+  end
+
 
 end
