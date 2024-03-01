@@ -18,6 +18,8 @@ class StatTracker
     StatTracker.new(games, teams, game_teams)
   end
 
+  # Game Statistics
+
   def percentage_home_wins
     Game.percentage_home_wins
   end
@@ -37,4 +39,13 @@ class StatTracker
   def average_goals_by_season
     Game.average_goals_by_season
   end
+
+  # League Statistics
+
+  def highest_scoring_visitor
+  end
+
+  def lowest_scoring_visitor
+  end
+
 end
