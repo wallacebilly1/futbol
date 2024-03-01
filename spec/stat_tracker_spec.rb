@@ -56,4 +56,10 @@ RSpec.describe StatTracker do
     expect(goals_by_season.count).to eq 6
   end
 
+  it '#highest_scoring_visitor' do
+  end
+
+  it '#lowest_scoring_visitor' do
+  end
+
 end
