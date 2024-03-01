@@ -43,9 +43,11 @@ class StatTracker
   # League Statistics
 
   def highest_scoring_visitor
+    Team.highest_scoring_visitor
   end
 
   def lowest_scoring_visitor
+    Team.lowest_scoring_visitor
   end
 
 end
