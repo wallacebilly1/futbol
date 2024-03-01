@@ -1,7 +1,7 @@
 require 'CSV'
 
 class Team
-  @@all_teams = []
+  @@all = []
   attr_reader :id, :name
 
   def initialize(team_data)
@@ -16,21 +16,45 @@ class Team
         id: row["team_id"],
         name: row["teamName"]
       }
-    @@all_teams << Team.new(team_data)  
+    @@all << Team.new(team_data)  
     end
-    @@all_teams
+    @@all
   end
 
-  def self.all_teams
-    @@all_teams
+  def self.all
+    @@all
   end
 
   def self.highest_scoring_visitor
+    highest_scoring_visitor = String.new
+    games_played = 0
+    score_counter = 0
+    score_pg = 0
 
+    @@all.each do |team|
+      Game.all.each do |game|
+        if team.id == game.away_team_id
+          games_played += 1
+          score_counter += game.away_goals
+        end
+      end
+
+      avg_score_pg = (score_counter / games_played.to_f).round(4)
+
+      if avg_score_pg > score_pg
+        highest_scoring_visitor = team.name
+        score_pg = avg_score_pg
+      end
+
+      games_played = 0
+      score_counter = 0
+    end
+
+    highest_scoring_visitor
   end
 
-  def self.lowest_scoring_visitor
+  # def self.lowest_scoring_visitor
 
-  end
+  # end
 
 end
