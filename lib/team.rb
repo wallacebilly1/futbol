@@ -26,35 +26,79 @@ class Team
   end
 
   def self.highest_scoring_visitor
-    highest_scoring_visitor = String.new
-    games_played = 0
-    score_counter = 0
-    score_pg = 0
+    calculate_scoring_array
+    
 
-    @@all.each do |team|
-      Game.all.each do |game|
-        if team.id == game.away_team_id
-          games_played += 1
-          score_counter += game.away_goals
-        end
-      end
-
-      avg_score_pg = (score_counter / games_played.to_f).round(4)
-
-      if avg_score_pg > score_pg
-        highest_scoring_visitor = team.name
-        score_pg = avg_score_pg
-      end
-
-      games_played = 0
-      score_counter = 0
-    end
-
-    highest_scoring_visitor
   end
 
-  # def self.lowest_scoring_visitor
+  def self.calculate_scoring_array
+    hsv = Hash.new
+    dope_array = Array.new
+       
+    @@all.each do |team|
+      hsv[:team_id] = team.id
+      hsv[:team_name] = team.name
+      hsv[:team_games_played] = 0
+      hsv[:team_score_counter] = 0
+      Game.all.each do |game|
+        if team.id == game.away_team_id
+          hsv[:team_games_played] += 1
+          hsv[:team_score_counter] += game.away_goals
+        end
+      end
+      dope_array << hsv[:aspg] = (hsv[:team_score_counter] / hsv[:team_games_played].to_f).round(8)
+    end
 
-  # end
+    p dope_array.sort
+  end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def self.highest_scoring_visitor
+  #   highest_scoring_visitor = String.new
+  #   score_pg = 0
+  #   @@all.each do |team|
+  #     games_played = 0
+  #     score_counter = 0
+  #     Game.all.each do |game|
+  #       if team.id == game.away_team_id
+  #         games_played += 1
+  #         score_counter += game.away_goals
+  #       end
+  #     end
+  #     team_avg_score_pg = (score_counter / games_played.to_f).round(4)
+  #     if team_avg_score_pg > score_pg
+  #       highest_scoring_visitor = team.name
+  #       score_pg = team_avg_score_pg
+  #     end
+  #   end
+  #   highest_scoring_visitor
+  # end
+
+  # def self.lowest_scoring_visitor
+  # end
