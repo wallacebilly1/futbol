@@ -26,30 +26,35 @@ class Team
   end
 
   def self.highest_scoring_visitor
-    calculate_scoring_array
-    
-
+    highest_scoring_visitor = generate_all_team_info.last[:team_name]
   end
 
-  def self.calculate_scoring_array
-    hsv = Hash.new
-    dope_array = Array.new
-       
+  def self.lowest_scoring_visitor
+    lowest_scoring_visitor = generate_all_team_info.first[:team_name]
+  end
+
+  def self.generate_all_team_info
+    all_team_info = Array.new
     @@all.each do |team|
-      hsv[:team_id] = team.id
-      hsv[:team_name] = team.name
-      hsv[:team_games_played] = 0
-      hsv[:team_score_counter] = 0
+      team_info = {
+        team_id: team.id,
+        team_name: team.name,
+        team_games_played: 0,
+        team_score_counter: 0        
+      }
       Game.all.each do |game|
         if team.id == game.away_team_id
-          hsv[:team_games_played] += 1
-          hsv[:team_score_counter] += game.away_goals
+          team_info[:team_games_played] += 1
+          team_info[:team_score_counter] += game.away_goals
         end
       end
-      dope_array << hsv[:aspg] = (hsv[:team_score_counter] / hsv[:team_games_played].to_f).round(8)
+      team_info[:aspg] = (team_info[:team_score_counter] / team_info[:team_games_played].to_f).round(8)
+      all_team_info << team_info
     end
-
-    p dope_array.sort
+    sorted_team_info = all_team_info.sort_by do |element|
+      element[:aspg]
+    end
+    sorted_team_info
   end
 
 end

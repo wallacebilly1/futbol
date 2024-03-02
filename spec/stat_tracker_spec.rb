@@ -57,9 +57,11 @@ RSpec.describe StatTracker do
   end
 
   it '#highest_scoring_visitor' do
+    highest_scoring_visitor = @stat_tracker.highest_scoring_visitor
   end
 
   it '#lowest_scoring_visitor' do
+    lowest_scoring_visitor = @stat_tracker.lowest_scoring_visitor
   end
 
 end
