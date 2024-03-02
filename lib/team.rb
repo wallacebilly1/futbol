@@ -26,35 +26,45 @@ class Team
   end
 
   def self.highest_scoring_visitor
-    highest_scoring_visitor = generate_all_team_info.last[:team_name]
+    all_team_info.sort_by do |team|
+      team[:avg_score_pg]
+    end.last[:team_name]
   end
 
   def self.lowest_scoring_visitor
-    lowest_scoring_visitor = generate_all_team_info.first[:team_name]
+    all_team_info.sort_by do |team|
+      team[:avg_score_pg]
+    end.first[:team_name]
   end
 
-  def self.generate_all_team_info
+
+  def self.all_team_info
     all_team_info = Array.new
     @@all.each do |team|
       team_info = {
         team_id: team.id,
         team_name: team.name,
         team_games_played: 0,
-        team_score_counter: 0        
+        team_score_counter: 0,
       }
-      Game.all.each do |game|
-        if team.id == game.away_team_id
-          team_info[:team_games_played] += 1
-          team_info[:team_score_counter] += game.away_goals
-        end
-      end
-      team_info[:aspg] = (team_info[:team_score_counter] / team_info[:team_games_played].to_f).round(8)
-      all_team_info << team_info
+      p Game.all.count
+      p team_info
     end
-    sorted_team_info = all_team_info.sort_by do |element|
-      element[:aspg]
-    end
-    sorted_team_info
+    #   #.each do |game|
+    #     if team_info[:team_id] == game.away_team_id
+    #       team_info[:team_games_played] += 1
+    #       team_info[:team_score_counter] += game.away_goals
+    #     end
+    #   end
+
+
+
+    #   p "#{team_info[:team_score_counter]} / #{team_info[:team_games_played]}"
+    #   team_info[:avg_score_pg] = (team_info[:team_score_counter].to_f / team_info[:team_games_played].to_f)
+    #   all_team_info << team_info
+    # end
+    # require 'pry'; binding.pry
+    # all_team_info
   end
 
 end

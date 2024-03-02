@@ -26,4 +26,6 @@ RSpec.describe Team do
     expect(starter.name).to eq "Atlanta United"
   end
 
+  
+
 end
