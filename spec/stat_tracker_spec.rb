@@ -58,10 +58,13 @@ RSpec.describe StatTracker do
 
   it '#highest_scoring_visitor' do
     highest_scoring_visitor = @stat_tracker.highest_scoring_visitor
+    expect(highest_scoring_visitor).to be_a String
+    expect(highest_scoring_visitor).to eq ("FC Dallas")
   end
 
   it '#lowest_scoring_visitor' do
-    lowest_scoring_visitor = @stat_tracker.lowest_scoring_visitor
+    lowest_scoring_visitor = @stat_tracker.lowest_scoring_visitor_scoring_visitor
+    expect(highest_scoring_visitor).to be_a String
+    expect(highest_scoring_visitor).to eq ("San Jose Earthquakes")
   end
-
 end
