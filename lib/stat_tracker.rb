@@ -18,7 +18,7 @@ class StatTracker
     StatTracker.new(games, teams, game_teams)
   end
 
-  # Game Statistics (All Completed)
+  ### Game Statistics (7/7 Completed)
 
   def highest_total_score
     Game.highest_total_score
@@ -48,7 +48,7 @@ class StatTracker
     Game.average_goals_by_season
   end
 
-  # League Statistics
+  ### League Statistics (5/7 Completed)
 
   def count_of_teams
     Team.count_of_teams
@@ -66,28 +66,25 @@ class StatTracker
     Team.highest_scoring_visitor
   end
 
-  ## Highest Scoring Home Team
-  
+  # Highest Scoring Home Team
+
   def lowest_scoring_visitor
     Team.lowest_scoring_visitor
   end
 
-  ## Lowest Scoring Home Team
+  # Lowest Scoring Home Team
 
-  # Season Statistics
+  ### Season Statistics (1/6 Completed)
 
-  ## Winningest Coach
+  # Winningest Coach
 
-  ## Worst Coach
+  # Worst Coach
 
-  ## Most Accurate Team
+  # Most Accurate Team
 
-  ## Least Accurate Team
+  # Least Accurate Team
 
-  # def most_tackles(season)
-  #   Game.most_tackles
-  #   GameTeams.most_tackles
-  # end
+  # Most Tackles
 
   def fewest_tackles(season_id)
     team_id = GameTeam.fewest_tackles_by_season(season_id)
