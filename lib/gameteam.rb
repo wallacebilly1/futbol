@@ -59,4 +59,33 @@ class GameTeam
     tackles_per_team_hash = GameTeam.tackles_per_team(season_id)
     GameTeam.fewest_tackles(tackles_per_team_hash)
   end
+
+  def self.best_coach(season_id)
+    games_by_coach = Hash.new(0)
+    wins_by_coach = Hash.new(0)
+
+    @@all.each do |row|
+      if season_id[0..3] == row.game_id[0..3]
+        games_by_coach[row.head_coach] += 1
+      end
+
+      if row.result == "WIN" && season_id[0..3] == row.game_id[0..3]
+        wins_by_coach[row.head_coach] += 1
+      end
+    end
+
+    win_percent_by_coach = Hash.new
+
+    coach_percent_hash = games_by_coach.each do |key, value|
+      if wins_by_coach[key].nil? || wins_by_coach[key] == 0
+        win_percent_by_coach[key] = nil
+      else
+        win_percent_by_coach[key] = value.to_f / wins_by_coach[key]
+      end
+      win_percent_by_coach
+    end
+    coach_percent_hash.max_by do |key, value|
+      value
+    end.first
+  end
 end
