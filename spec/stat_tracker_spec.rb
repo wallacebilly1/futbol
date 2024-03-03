@@ -3,7 +3,7 @@ require './spec/spec_helper'
 RSpec.describe StatTracker do
 
   before(:all) do
-    games_file = './data/games_dummy.csv'
+    games_file = './data/games.csv'
     teams_file = './data/teams.csv'
     game_teams_file = './data/game_teams_dummy.csv'
 
@@ -29,19 +29,19 @@ RSpec.describe StatTracker do
   it '#percentage_home_wins returns correct return value' do
     percentage_home_wins = @stat_tracker.percentage_home_wins
     expect(percentage_home_wins).to be_a Float
-    expect(percentage_home_wins).to eq 0.48
+    expect(percentage_home_wins).to eq 0.44
   end
 
   it '#percentage_visitor_wins returns correct return value' do
     percentage_visitor_wins = @stat_tracker.percentage_visitor_wins
     expect(percentage_visitor_wins).to be_a Float
-    expect(percentage_visitor_wins).to eq 0.29
+    expect(percentage_visitor_wins).to eq 0.36
   end
 
   it '#percentage_ties returns correct return value' do
     percentage_ties = @stat_tracker.percentage_ties
     expect(percentage_ties).to be_a Float
-    expect(percentage_ties).to eq 0.23
+    expect(percentage_ties).to eq 0.2
   end
 
   it '#count_of_games_by_season' do

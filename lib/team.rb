@@ -26,20 +26,7 @@ class Team
   end
 
   def self.highest_scoring_visitor
-    all_team_info.sort_by do |team|
-      team[:avg_score_pg]
-    end.last[:team_name]
-  end
-
-  def self.lowest_scoring_visitor
-    all_team_info.sort_by do |team|
-      team[:avg_score_pg]
-    end.first[:team_name]
-  end
-
-
-  def self.all_team_info
-    all_team_info = Array.new
+    average_score_teams_list = Array.new
     @@all.each do |team|
       team_info = {
         team_id: team.id,
@@ -47,9 +34,70 @@ class Team
         team_games_played: 0,
         team_score_counter: 0,
       }
-      p Game.all.count
-      p team_info
+      Game.all.each do |game|
+        if team_info[:team_id] == game.away_team_id
+          team_info[:team_games_played] += 1
+          team_info[:team_score_counter] += game.away_goals
+        end
+      end
+      team_info[:team_average_score_per_game] = (team_info[:team_score_counter].to_f / team_info[:team_games_played].to_f)
+      average_score_teams_list << team_info
     end
+    sorted = average_score_teams_list.sort_by do |team|
+      team[:team_average_score_per_game]
+    end.last[:team_name]
+  end
+
+  def self.lowest_scoring_visitor
+    average_score_teams_list = Array.new
+    @@all.each do |team|
+      team_info = {
+        team_id: team.id,
+        team_name: team.name,
+        team_games_played: 0,
+        team_score_counter: 0,
+      }
+      Game.all.each do |game|
+        if team_info[:team_id] == game.away_team_id
+          team_info[:team_games_played] += 1
+          team_info[:team_score_counter] += game.away_goals
+        end
+      end
+      team_info[:team_average_score_per_game] = (team_info[:team_score_counter].to_f / team_info[:team_games_played].to_f)
+      average_score_teams_list << team_info
+    end
+    sorted = average_score_teams_list.sort_by do |team|
+      team[:team_average_score_per_game]
+    end.first[:team_name]
+  end
+
+end
+
+
+
+
+
+
+
+
+
+
+#   def self.highest_scoring_visitor
+#     all_team_info.sort_by do |team|
+#       team[:avg_score_pg]
+#     end.last[:team_name]
+#   end
+
+#   def self.lowest_scoring_visitor
+#     all_team_info.sort_by do |team|
+#       team[:avg_score_pg]
+#     end.first[:team_name]
+#   end
+
+
+
+
+
     #   #.each do |game|
     #     if team_info[:team_id] == game.away_team_id
     #       team_info[:team_games_played] += 1
@@ -65,11 +113,6 @@ class Team
     # end
     # require 'pry'; binding.pry
     # all_team_info
-  end
-
-end
-
-
 
 
 

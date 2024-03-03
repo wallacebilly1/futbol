@@ -14,6 +14,6 @@ locations = {
 stat_tracker = StatTracker.from_csv(locations)
 
 p stat_tracker.highest_scoring_visitor
-#p stat_tracker.lowest_scoring_visitor
+# stat_tracker.lowest_scoring_visitor
 
 # require 'pry'; binding.pry
