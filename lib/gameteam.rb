@@ -84,7 +84,38 @@ class GameTeam
       end
       win_percent_by_coach
     end
+
     win_percent_by_coach.compact.max_by do |key, value|
+      value
+    end.first
+  end
+
+  def self.worst_coach(season_id)
+    games_by_coach = Hash.new(0)
+    wins_by_coach = Hash.new(0)
+
+    @@all.each do |row|
+      if season_id[0..3] == row.game_id[0..3]
+        games_by_coach[row.head_coach] += 1
+      end
+
+      if row.result == "WIN" && season_id[0..3] == row.game_id[0..3]
+        wins_by_coach[row.head_coach] += 1
+      end
+    end
+
+    win_percent_by_coach = Hash.new
+
+    games_by_coach.each do |key, value|
+      if wins_by_coach[key].nil? || wins_by_coach[key] == 0
+        win_percent_by_coach[key] = nil
+      else
+        win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
+      end
+      win_percent_by_coach
+    end
+    
+    win_percent_by_coach.compact.min_by do |key, value|
       value
     end.first
   end
