@@ -54,17 +54,17 @@ RSpec.describe Game do
       expect(Game.all.count).to eq 31
     end
 
-    it '#percentage_home_wins returns correct return value' do
+    it 'can return total percentage_home_wins' do
       expect(Game.percentage_home_wins).to be_a Float
       expect(Game.percentage_home_wins).to eq 0.48
     end
 
-    it '#percentage_visitor_wins returns correct return value' do
+    it 'can return total percentage_visitor_wins' do
       expect(Game.percentage_visitor_wins).to be_a Float
       expect(Game.percentage_visitor_wins).to eq 0.29
     end
 
-    it '#percentage_ties returns correct return value' do
+    it 'can return total percentage_ties' do
       expect(Game.percentage_ties).to be_a Float
       expect(Game.percentage_ties).to eq 0.23
     end
