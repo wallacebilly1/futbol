@@ -61,4 +61,9 @@ RSpec.describe StatTracker do
     expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
   end
 
+  it '#best_coach' do
+    expect(@stat_tracker.best_coach("20122013")).to eq "Claude Julien"
+    expect(@stat_tracker.best_coach("20132014")).to eq "Darryl Sutter"
+  end
+
 end
