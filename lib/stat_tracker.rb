@@ -4,13 +4,13 @@ require_relative 'gameteam'
 
 class StatTracker
   attr_reader :games, :teams, :game_teams
-  
+
   def initialize(games, teams, game_teams)
     @games = games
     @teams = teams
     @game_teams = game_teams
   end
-  
+
   def self.from_csv(locations)
     games = Game.create_from_csv(locations[:games])
     teams = Team.create_from_csv(locations[:teams])
@@ -18,7 +18,15 @@ class StatTracker
     StatTracker.new(games, teams, game_teams)
   end
 
-  # Game Statistics
+  # Game Statistics (All Completed)
+
+  def highest_total_score
+    Game.highest_total_score
+  end
+
+  def lowest_total_score
+    Game.lowest_total_score
+  end
 
   def percentage_home_wins
     Game.percentage_home_wins
@@ -42,16 +50,47 @@ class StatTracker
 
   # League Statistics
 
+  def count_of_teams
+    Team.count_of_teams
+  end
+
+  def best_offense
+    GameTeam.best_offense
+  end
+
+  def worst_offense
+    GameTeam.worst_offense
+  end
+
   def highest_scoring_visitor
     Team.highest_scoring_visitor
   end
+
+  ## Highest Scoring Home Team
 
   def lowest_scoring_visitor
     Team.lowest_scoring_visitor
   end
 
+  ## Lowest Scoring Home Team
+
+  # Season Statistics
+
+  ## Winningest Coach
+
+  ## Worst Coach
+
+  ## Most Accurate Team
+
+  ## Least Accurate Team
+
+  def most_tackles(season)
+    # Game.most_tackles
+    # GameTeams.most_tackles
+  end
+
   def fewest_tackles(season_id)
     team_id = GameTeam.fewest_tackles_by_season(season_id)
     Team.find_team_name_by_id(team_id)
-  end
+  end 
 end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Game do
-  before(:all) do  
+  before(:all) do
     @games = Game.create_from_csv("./data/games_dummy.csv")
   end
 
@@ -103,7 +103,15 @@ RSpec.describe Game do
         '20172018' => 4.25
       }
 
-      expect(Game.average_goals_by_season).to eq (expected)
+        expect(Game.average_goals_by_season).to eq (expected)
+    end
+
+    it "gets the highest total score from all games" do
+        expect(Game.highest_total_score).to eq(9)
+    end
+
+    it "gets the lowest total score from all games" do
+        expect(Game.lowest_total_score).to eq(1)
     end
   end
 end

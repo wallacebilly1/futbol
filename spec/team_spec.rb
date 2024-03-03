@@ -2,16 +2,19 @@ require 'spec_helper'
 
 RSpec.describe Team do
 
-  before(:each) do
-    team_data = {
-      id: 1,
-      name: "Atlanta United"
-    }
-
-    @team1 = Team.new(team_data)
+  before(:all) do
+    @teams = Team.create_from_csv("./data/teams.csv")
   end
 
-  describe '#initialize' do
+  describe "#initialize" do
+    before(:each) do
+      team_data = {
+        id: 1,
+        name: "Atlanta United"
+      }
+      @team1 = Team.new(team_data)
+    end
+
     it 'exists' do
       expect(@team1).to be_an_instance_of Team
     end
@@ -20,14 +23,14 @@ RSpec.describe Team do
       expect(@team1.id).to eq "1"
       expect(@team1.name).to eq "Atlanta United"
     end
-
-    it 'can create Team objects using the create_from_csv method' do
-      expect(@team1.id).to eq "1"
-      expect(@team1.name).to eq "Atlanta United"
-    end  
   end
 
   describe '#methods' do
+    it 'can create Team objects using the create_from_csv method' do
+      expect(@teams.first.id).to eq "1"
+      expect(@teams.first.name).to eq "Atlanta United"
+    end
+
     it '#highest_scoring_visitor outputs correctly' do
       expect(Team.highest_scoring_visitor).to eq "FC Dallas"
     end
@@ -50,5 +53,34 @@ RSpec.describe Team do
       expect(Team.find_team_name_by_id("3")).to eq "Houston Dynamo"
       expect(Team.find_team_name_by_id("6")).to eq "FC Dallas"
     end
+
+    it "can count the total number of teams" do
+      expect(Team.count_of_teams).to eq(32)
+    end
   end
 end
+
+  # before(:each) do
+  #   team_data = {
+  #     id: 1,
+  #     name: "Atlanta United"
+  #   }
+
+  #   @team1 = Team.new(team_data)
+  # end
+
+  # describe '#initialize' do
+  #   it 'exists' do
+  #     expect(@team1).to be_an_instance_of Team
+  #   end
+
+  #   it 'has attributes that can be read' do
+  #     expect(@team1.id).to eq "1"
+  #     expect(@team1.name).to eq "Atlanta United"
+  #   end
+
+  #   it 'can create Team objects using the create_from_csv method' do
+  #     expect(@team1.id).to eq "1"
+  #     expect(@team1.name).to eq "Atlanta United"
+  #   end  
+  # end

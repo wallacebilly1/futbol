@@ -25,10 +25,18 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.games.first).to be_a Game
       expect(@stat_tracker.teams.first).to be_a Team
       expect(@stat_tracker.game_teams.first).to be_a GameTeam
-    end  
+    end
   end
 
   describe '#methods' do
+    it "#highest_total_score" do
+      expect(@stat_tracker.highest_total_score).to eq 9
+    end
+
+    it "#lowest_total_score" do
+      expect(@stat_tracker.lowest_total_score).to eq 1
+    end
+
     it '#percentage_home_wins' do
       percentage_home_wins = @stat_tracker.percentage_home_wins
       expect(percentage_home_wins).to be_a Float
@@ -53,21 +61,51 @@ RSpec.describe StatTracker do
       expect(games_by_season.count).to eq 6
     end
 
+    # Average Goals Per Game
+
     it '#average_goals_by_season' do
       goals_by_season = @stat_tracker.average_goals_by_season
       expect(goals_by_season).to be_a Hash
       expect(goals_by_season.count).to eq 6
     end
 
+    it "#count_of_teams" do
+      expect(@stat_tracker.count_of_teams).to eq 32
+    end
+
+    # Best Offense
+    # it "#best_offense" do
+    #   expect(@stat_tracker.best_offense).to eq "Reign FC"
+    # end
+
+    # Worst Offense
+    # it "#worst_offense" do
+    #   expect(@stat_tracker.worst_offense).to eq "Utah Royals FC"
+    # end
+
     it '#highest_scoring_visitor' do
       expect(@stat_tracker.highest_scoring_visitor).to be_a String
       expect(@stat_tracker.highest_scoring_visitor).to eq ("FC Dallas")
     end
 
+    # Highest Scoring Home Team
+
     it '#lowest_scoring_visitor' do
       expect(@stat_tracker.lowest_scoring_visitor).to be_a String
       expect(@stat_tracker.lowest_scoring_visitor).to eq ("San Jose Earthquakes")
     end
+
+    # Lowest Scoring Home Team
+
+    # Winningest Coach
+
+    # Worst Coach
+
+    # Most Accurate Team
+
+    # Least Accurate Team
+
+    # Most Tackles
 
     it '#fewest_tackles' do
       expect(@stat_tracker.fewest_tackles("20122013")).to eq "Sporting Kansas City"
