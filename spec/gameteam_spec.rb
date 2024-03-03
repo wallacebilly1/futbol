@@ -69,5 +69,10 @@ RSpec.describe GameTeam do
       expect(GameTeam.fewest_tackles_by_season("20122013")).to eq "5"
       expect(GameTeam.fewest_tackles_by_season("20132014")).to eq "16"
     end
+
+    it 'can return the coach with the best win percentage for a given season' do
+      expect(GameTeam.best_coach("20122013")).to eq "Claude Julien"
+      expect(GameTeam.best_coach("20132014")).to eq "Darryl Sutter"
+    end
   end
 end
