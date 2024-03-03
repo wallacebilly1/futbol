@@ -76,15 +76,15 @@ class GameTeam
 
     win_percent_by_coach = Hash.new
 
-    coach_percent_hash = games_by_coach.each do |key, value|
+    games_by_coach.each do |key, value|
       if wins_by_coach[key].nil? || wins_by_coach[key] == 0
         win_percent_by_coach[key] = nil
       else
-        win_percent_by_coach[key] = value.to_f / wins_by_coach[key]
+        win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
       end
       win_percent_by_coach
     end
-    coach_percent_hash.max_by do |key, value|
+    win_percent_by_coach.compact.max_by do |key, value|
       value
     end.first
   end
