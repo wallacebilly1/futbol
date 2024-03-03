@@ -74,5 +74,10 @@ RSpec.describe GameTeam do
       expect(GameTeam.winningest_coach("20122013")).to eq "Claude Julien"
       expect(GameTeam.winningest_coach("20132014")).to eq "Darryl Sutter"
     end
+
+    it 'can return the coach with the worst win percentage for a given season' do
+      expect(GameTeam.worst_coach("20142015")).to eq "Mike Yeo"
+      expect(GameTeam.worst_coach("20162017")).to eq "Guy Boucher"
+    end
   end
 end
