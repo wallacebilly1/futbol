@@ -43,6 +43,7 @@ class Team
   end
 
   def self.generate_score_data
+
     average_score_teams_list = Array.new
     @@all.each do |team|
       team_info = {
@@ -52,7 +53,7 @@ class Team
         team_score_counter: 0,
       }
       Game.all.each do |game|
-        if team_info[:team_id] == game.away_team_id
+        if team_info[:team_id].to_i == game.away_team_id
           team_info[:team_games_played] += 1
           team_info[:team_score_counter] += game.away_goals
         end
@@ -63,6 +64,7 @@ class Team
     sorted = average_score_teams_list.sort_by do |team|
       team[:team_average_score_per_game]
     end
+    sorted
   end
 
 end

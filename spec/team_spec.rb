@@ -21,8 +21,8 @@ RSpec.describe Team do
   end
 
   it 'can create Team objects using the create_from_csv method' do
-    expect(@teams.first.id).to eq "1"
-    expect(@teams.first.name).to eq "Atlanta United"
+    expect(@team1.id).to eq "1"
+    expect(@team1.name).to eq "Atlanta United"
   end
 
   it '#highest_scoring_visitor outputs correctly' do
@@ -33,14 +33,14 @@ RSpec.describe Team do
     expect(Team.lowest_scoring_visitor).to eq "San Jose Earthquakes"
   end
 
-  it '#generate_score_data creates correct data' do
+  it '#generate_score_data creates correct sorted data' do
     expect(Team.generate_score_data).to be_a Array
     expect(Team.generate_score_data[0]).to be_a Hash
-    expect(Team.generate_score_data[0][:team_id]).to be_a Integer
-    expect(Team.generate_score_data[0][:team_name]).to be_a String
-    expect(Team.generate_score_data[0][:team_games_played]).to be_a Integer
-    expect(Team.generate_score_data[0][:team_score_counter]).to be_a Integer
-    expect(Team.generate_score_data[0][:team_average_score_per_game]).to be_a Float
+    expect(Team.generate_score_data[0][:team_id]).to eq "27"
+    expect(Team.generate_score_data[0][:team_name]).to eq "San Jose Earthquakes"
+    expect(Team.generate_score_data[0][:team_games_played]).to eq 65
+    expect(Team.generate_score_data[0][:team_score_counter]).to eq 120
+    expect(Team.generate_score_data[0][:team_average_score_per_game]).to eq 1.8461538461538463
   end
 
   it 'can return the team name when given a team_id' do
