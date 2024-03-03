@@ -67,7 +67,7 @@ class StatTracker
   end
 
   ## Highest Scoring Home Team
-
+  
   def lowest_scoring_visitor
     Team.lowest_scoring_visitor
   end

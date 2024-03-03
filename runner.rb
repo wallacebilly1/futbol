@@ -13,9 +13,7 @@ locations = {
 
 stat_tracker = StatTracker.from_csv(locations)
 
-stat_tracker.highest_scoring_visitor
-stat_tracker.lowest_scoring_visitor
-
-p stat_tracker.count_of_teams
+p stat_tracker.highest_scoring_visitor
+p stat_tracker.lowest_scoring_visitor
 
 # require 'pry'; binding.pry
