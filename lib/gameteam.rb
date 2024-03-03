@@ -60,7 +60,7 @@ class GameTeam
     GameTeam.fewest_tackles(tackles_per_team_hash)
   end
 
-  def self.best_coach(season_id)
+  def self.winningest_coach(season_id)
     games_by_coach = Hash.new(0)
     wins_by_coach = Hash.new(0)
 

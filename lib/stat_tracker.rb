@@ -43,7 +43,7 @@ class StatTracker
     Team.find_team_name_by_id(team_id)
   end
 
-  def best_coach(season_id)
-    GameTeam.best_coach(season_id)
+  def winningest_coach(season_id)
+    GameTeam.winningest_coach(season_id)
   end
 end
