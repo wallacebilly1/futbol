@@ -43,7 +43,6 @@ class Team
   end
 
   def self.generate_score_data
-
     average_score_teams_list = Array.new
     @@all.each do |team|
       team_info = {
@@ -66,5 +65,4 @@ class Team
     end
     sorted
   end
-
 end
