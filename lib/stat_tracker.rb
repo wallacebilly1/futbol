@@ -84,10 +84,10 @@ class StatTracker
 
   ## Least Accurate Team
 
-  def most_tackles(season)
-    # Game.most_tackles
-    # GameTeams.most_tackles
-  end
+  # def most_tackles(season)
+  #   Game.most_tackles
+  #   GameTeams.most_tackles
+  # end
 
   def fewest_tackles(season_id)
     team_id = GameTeam.fewest_tackles_by_season(season_id)
