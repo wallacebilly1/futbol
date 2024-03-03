@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Team do
-
-  before(:all) do
-    @teams = Team.create_from_csv("./data/teams.csv")
-  end
+  # before(:all) do
+  #   @teams = Team.create_from_csv("./data/teams.csv")
+  # end
 
   describe "#initialize" do
     before(:each) do
@@ -27,8 +26,8 @@ RSpec.describe Team do
 
   describe '#methods' do
     it 'can create Team objects using the create_from_csv method' do
-      expect(@teams.first.id).to eq "1"
-      expect(@teams.first.name).to eq "Atlanta United"
+      expect(Team.all.first.id).to eq "1"
+      expect(Team.all.first.name).to eq "Atlanta United"
     end
 
     it '#highest_scoring_visitor outputs correctly' do
@@ -59,28 +58,3 @@ RSpec.describe Team do
     end
   end
 end
-
-  # before(:each) do
-  #   team_data = {
-  #     id: 1,
-  #     name: "Atlanta United"
-  #   }
-
-  #   @team1 = Team.new(team_data)
-  # end
-
-  # describe '#initialize' do
-  #   it 'exists' do
-  #     expect(@team1).to be_an_instance_of Team
-  #   end
-
-  #   it 'has attributes that can be read' do
-  #     expect(@team1.id).to eq "1"
-  #     expect(@team1.name).to eq "Atlanta United"
-  #   end
-
-  #   it 'can create Team objects using the create_from_csv method' do
-  #     expect(@team1.id).to eq "1"
-  #     expect(@team1.name).to eq "Atlanta United"
-  #   end  
-  # end

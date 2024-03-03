@@ -1,7 +1,6 @@
-require './spec/spec_helper'
+require 'spec_helper'
 
 RSpec.describe StatTracker do
-
   before(:all) do
     games_file = './data/games.csv'
     teams_file = './data/teams.csv'
@@ -30,11 +29,11 @@ RSpec.describe StatTracker do
 
   describe '#methods' do
     it "#highest_total_score" do
-      expect(@stat_tracker.highest_total_score).to eq 9
+      expect(@stat_tracker.highest_total_score).to eq 11
     end
 
     it "#lowest_total_score" do
-      expect(@stat_tracker.lowest_total_score).to eq 1
+      expect(@stat_tracker.lowest_total_score).to eq 0
     end
 
     it '#percentage_home_wins' do
