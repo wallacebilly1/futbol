@@ -50,4 +50,8 @@ class StatTracker
     Team.lowest_scoring_visitor
   end
 
+  def fewest_tackles(season_id)
+    team_id = GameTeam.fewest_tackles_by_season(season_id)
+    Team.find_team_name_by_id(team_id)
+  end
 end
