@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Team do
-
+  before(:all) do  
+    @teams = Team.create_from_csv("./data/teams.csv")
+  end
+      
   before(:each) do
     team_data = {
       id: 1,
