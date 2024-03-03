@@ -107,14 +107,14 @@ class GameTeam
     win_percent_by_coach = Hash.new
 
     games_by_coach.each do |key, value|
-      if wins_by_coach[key].nil? || wins_by_coach[key] == 0
+      if wins_by_coach[key].nil? 
         win_percent_by_coach[key] = nil
       else
         win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
       end
       win_percent_by_coach
     end
-    
+
     win_percent_by_coach.compact.min_by do |key, value|
       value
     end.first
