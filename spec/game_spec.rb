@@ -34,7 +34,7 @@ RSpec.describe Game do
     end
   end
 
-  describe '#Methods' do
+  describe '#methods' do
     it "can create Game objects using the create_from_csv method" do
       test_game = @games.first
 
