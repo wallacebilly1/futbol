@@ -71,8 +71,8 @@ RSpec.describe GameTeam do
     end
 
     it 'can return the coach with the best win percentage for a given season' do
-      expect(GameTeam.best_coach("20122013")).to eq "Claude Julien"
-      expect(GameTeam.best_coach("20132014")).to eq "Darryl Sutter"
+      expect(GameTeam.winningest_coach("20122013")).to eq "Claude Julien"
+      expect(GameTeam.winningest_coach("20132014")).to eq "Darryl Sutter"
     end
   end
 end
