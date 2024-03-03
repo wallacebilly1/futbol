@@ -42,4 +42,8 @@ class StatTracker
     team_id = GameTeam.fewest_tackles_by_season(season_id)
     Team.find_team_name_by_id(team_id)
   end
+
+  def best_coach(season_id)
+    GameTeam.best_coach(season_id)
+  end
 end
