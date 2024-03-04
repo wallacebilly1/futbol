@@ -77,9 +77,6 @@ class GameTeam
     # return team id(/name) with highest average score
   # end
 
-
-
-
   # def self.worst_offense
   #   Name of the team with the lowest average number of goals scored per game across all seasons.
   # end

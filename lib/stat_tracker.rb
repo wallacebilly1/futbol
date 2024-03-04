@@ -48,19 +48,19 @@ class StatTracker
     Game.average_goals_by_season
   end
 
-  ### League Statistics (5/7 Completed)
+  ### League Statistics (3/7 Completed)
 
   def count_of_teams
     Team.count_of_teams
   end
 
-  def best_offense
-    GameTeam.best_offense
-  end
+  # def best_offense
+  #   GameTeam.best_offense
+  # end
 
-  def worst_offense
-    GameTeam.worst_offense
-  end
+  # def worst_offense
+  #   GameTeam.worst_offense
+  # end
 
   def highest_scoring_visitor
     Team.highest_scoring_visitor
