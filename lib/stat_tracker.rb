@@ -22,36 +22,14 @@ class StatTracker
     Team.find_team_name_by_id(team_id)
   end
 
-  def highest_scoring_home_team 
-    find_team_name_by_id(GameTeam.avg_scores_per_team_home.max_by {|team_id, goals| goals}.first)
-  end
+  ### Game Statistics (7/8 Completed)
 
-  def lowest_scoring_home_team
-    find_team_name_by_id(GameTeam.avg_scores_per_team_home.min_by {|team_id, goals| goals}.first)
-  end
   def highest_total_score
     Game.highest_total_score
   end
 
   def lowest_total_score
     Game.lowest_total_score
-  end
-
-  def count_of_teams
-    Team.count_of_teams
-  end
-
-  def best_offense
-    GameTeam.best_offense
-  end
-
-  def worst_offense
-    GameTeam.worst_offense
-  end
-
-  def most_tackles(season)
-    # Game.most_tackles
-    # GameTeams.most_tackles
   end
 
   def percentage_home_wins
@@ -70,18 +48,40 @@ class StatTracker
     Game.count_of_games_by_season
   end
 
+  def average_goals_per_game
+    Game.average_goals_per_game
+  end
+
   def average_goals_by_season
     Game.average_goals_by_season
   end
 
-  def average_goals_per_game
-    Game.average_goals_per_game
+  ### League Statistics (5/7 Completed)
+
+  def count_of_teams
+    Team.count_of_teams
   end
-  
-  def fewest_tackles(season_id)
-    team_id = GameTeam.fewest_tackles_by_season(season_id)
-    Team.find_team_name_by_id(team_id)
+
+  # Best Offense
+  # Worst Offense
+
+  def highest_scoring_visitor
+    Team.highest_scoring_visitor
   end
+
+  def highest_scoring_home_team 
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.max_by {|team_id, goals| goals}.first)
+  end
+
+  def lowest_scoring_visitor
+    Team.lowest_scoring_visitor
+  end
+
+  def lowest_scoring_home_team
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.min_by {|team_id, goals| goals}.first)
+  end
+
+  ### Season Statistics (3/6 Completed)
 
   def winningest_coach(season_id)
     GameTeam.winningest_coach(season_id)
@@ -98,4 +98,14 @@ class StatTracker
   def least_accurate_team
     Team.find_team_name_by_id(GameTeam.least_accurate_team)
   end
+end
+  # Most Accurate Team
+  # Least Accurate Team
+  # Most Tackles
+
+  def fewest_tackles(season_id)
+    team_id = GameTeam.fewest_tackles_by_season(season_id)
+    Team.find_team_name_by_id(team_id)
+  end
+
 end
