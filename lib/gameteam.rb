@@ -1,5 +1,6 @@
 require 'CSV'
 
+
 class GameTeam
   @@all = []
   attr_reader :game_id,
@@ -40,6 +41,10 @@ class GameTeam
     @@all
   end
 
+  def all
+    @@all
+  end
+
   def self.tackles_per_team(season_id)
     tackles_per_team = Hash.new(0)
 
@@ -58,6 +63,23 @@ class GameTeam
   def self.fewest_tackles_by_season(season_id)
     tackles_per_team_hash = GameTeam.tackles_per_team(season_id)
     GameTeam.fewest_tackles(tackles_per_team_hash)
+  end
+
+  def self.avg_scores_per_team_home
+    team_scores = Hash.new(0)
+    gameteam_counter = Hash.new(0)
+    @@all.each do |gameteam|
+      if gameteam.hoa == "home"
+        team_scores[gameteam.team_id] += gameteam.goals
+        gameteam_counter[gameteam.team_id] += 1
+      end
+    end
+    array_of_scores_to_games = []
+    result_hash = {}
+    team_scores.values.each_with_index do |value, index|
+      array_of_scores_to_games << (value.to_f / gameteam_counter.values[index]).round(2)
+    end
+    result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
   # def self.best_offense

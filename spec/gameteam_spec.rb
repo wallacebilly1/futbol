@@ -69,6 +69,13 @@ RSpec.describe GameTeam do
       expect(GameTeam.fewest_tackles_by_season("20122013")).to eq "5"
       expect(GameTeam.fewest_tackles_by_season("20132014")).to eq "16"
     end
+
+    it 'has the average scores per home team' do
+      expect(GameTeam.avg_scores_per_team_home).to be_a Hash 
+      expected = {'6'=>2.75, '3'=>1.50, '5'=>0.67, '16'=>2.33, '30'=>1.50, '9'=>2.50}
+      
+      expect(GameTeam.avg_scores_per_team_home).to eq expected
+    end
   end
 
   # it "can check for team with the highest average number of goals scored per game across all seasons" do

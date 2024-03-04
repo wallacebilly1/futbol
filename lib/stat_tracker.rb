@@ -18,6 +18,17 @@ class StatTracker
     StatTracker.new(games, teams, game_teams)
   end
 
+  def find_team_name_by_id(team_id)
+    Team.find_team_name_by_id(team_id)
+  end
+
+  def highest_scoring_home_team 
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.max_by {|team_id, goals| goals}.first)
+  end
+
+  def lowest_scoring_home_team
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.min_by {|team_id, goals| goals}.first)
+  end
   def highest_total_score
     Game.highest_total_score
   end
@@ -43,10 +54,6 @@ class StatTracker
     # GameTeams.most_tackles
   end
 
-
-
-
-
   def percentage_home_wins
     Game.percentage_home_wins
   end
@@ -67,6 +74,10 @@ class StatTracker
     Game.average_goals_by_season
   end
 
+  def average_goals_per_game
+    Game.average_goals_per_game
+  end
+  
   def fewest_tackles(season_id)
     team_id = GameTeam.fewest_tackles_by_season(season_id)
     Team.find_team_name_by_id(team_id)
