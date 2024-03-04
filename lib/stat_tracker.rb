@@ -52,7 +52,6 @@ class StatTracker
     Game.count_of_games_by_season
   end
 
-  # Average Goals Per Game
   def average_goals_per_game
     Game.average_goals_per_game
   end
