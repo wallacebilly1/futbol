@@ -150,13 +150,15 @@ class GameTeam
     avg_scores_per_team_home.min_by {|team_id, goals| goals}.first
   end
 
-  def self.pull_id_goals_shots_and_math
+  def self.pull_id_goals_shots_and_math(season_id)
     id_and_goals = Hash.new(0)
     id_and_shots = Hash.new(0)
     
     @@all.each do |row|
-      id_and_goals[row.team_id] += row.goals
-      id_and_shots[row.team_id] += row.shots
+      if row.season_id == season_id
+        id_and_goals[row.team_id] += row.goals
+        id_and_shots[row.team_id] += row.shots
+      end
     end
 
     array_of_shots_to_goals =[]
@@ -167,12 +169,12 @@ class GameTeam
     result_hash = id_and_shots.keys.zip(array_of_shots_to_goals).to_h
   end
 
-  def self.most_accurate_team
-    pull_id_goals_shots_and_math.min_by {|team_id, shotsngoals| shotsngoals}.first
+  def self.most_accurate_team(season_id)
+    pull_id_goals_shots_and_math(season_id).min_by {|team_id, shotsngoals| shotsngoals}.first
   end
 
-  def self.least_accurate_team
-    pull_id_goals_shots_and_math.max_by {|team_id, shotsngoals| shotsngoals}.first
+  def self.least_accurate_team(season_id)
+    pull_id_goals_shots_and_math(season_id).max_by {|team_id, shotsngoals| shotsngoals}.first
   end
 
   # def self.best_offense

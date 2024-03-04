@@ -91,12 +91,12 @@ class StatTracker
     GameTeam.worst_coach(season_id)
   end
 
-  def most_accurate_team
-    Team.find_team_name_by_id(GameTeam.most_accurate_team)
+  def most_accurate_team(season_id)
+    Team.find_team_name_by_id(GameTeam.most_accurate_team(Game.season))
   end
 
   def least_accurate_team
-    Team.find_team_name_by_id(GameTeam.least_accurate_team)
+    Team.find_team_name_by_id(GameTeam.least_accurate_team(Game.season))
   end
 
   # Most Tackles
