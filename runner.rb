@@ -12,9 +12,5 @@ locations = {
 }
 
 stat_tracker = StatTracker.from_csv(locations)
-#  p stat_tracker.find_team_name_by_id(27)
-# p stat_tracker.percentage_home_wins
-# p stat_tracker.percentage_visitor_wins
-# p stat_tracker.percentage_ties
 
-# require 'pry'; binding.pry
+require 'pry'; binding.pry
