@@ -142,6 +142,23 @@ class GameTeam
     result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
+  def pull_id_goals_shots
+    id_and_goals = Hash.new(0)
+    id_and_goals = Hash.new(0)
+    
+    @@all.each do |row|
+      id_and_goals[row.team_id] += row.goals
+      id_and_shots[row.team_id] += row.shots
+    end
+  end
+  def self.most_accurate_team
+   
+  end
+
+  def self.least_accurate_team
+
+  end
+
   # def self.best_offense
   # @@game_teams.first.goals
   # require 'pry'; binding.pry
