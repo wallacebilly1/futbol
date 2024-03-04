@@ -60,22 +60,17 @@ class GameTeam
     GameTeam.fewest_tackles(tackles_per_team_hash)
   end
 
-  # def self.best_offense
-    # @@game_teams.first.goals
-    # require 'pry'; binding.pry
-    # team_stat = {}
-    # start with an array of game teams and for each game team,
-    # @@game_teams.each do |gameteam|
-
-      # if team_id key doesn't exist,
-      # add team_id as a key and its value will be the goals and games hash.
-      # team_stat[3] = {goals: (gameteam.goals), games: 1}
-      # else if team_id does exist
-      # add together goals and add 1 to games
-    #
-    # divide goals scored by number of games played for each team
-    # return team id(/name) with highest average score
-  # end
+  def self.best_offense
+    team_id_hash = @@all.group_by { |games| games.team_id }
+    team_id_hash.each do |teamid, games|
+      sum = games.sum { |games| games.goals }
+      count = games.count
+      team_id_hash[teamid] = (sum / count.to_f).round(2)
+    end
+    bestid = team_id_hash.max_by { |_, average| average }.first
+    teams = Team.create_from_csv('./data/teams.csv')
+    best_offense = teams.find { |team| team.id == bestid }.name
+  end
 
 
 
