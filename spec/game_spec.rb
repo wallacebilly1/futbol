@@ -114,4 +114,8 @@ RSpec.describe Game do
         expect(Game.lowest_total_score).to eq(1)
     end
   end
+
+  it 'averages the goals per game' do
+    expect(Game.average_goals_per_game).to eq(4.32)
+  end
 end

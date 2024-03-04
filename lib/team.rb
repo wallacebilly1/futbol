@@ -6,7 +6,7 @@ class Team
 
   def initialize(team_data)
     @id = team_data[:id].to_s
-    @name = team_data[:name]
+    @name = team_data[:name].to_s
   end
 
   def self.create_from_csv(file_path)
@@ -22,8 +22,8 @@ class Team
 
   def self.find_team_name_by_id(team_id)
     team_name = String.new
-    @@all.each do |team|
-      if team.id == team_id
+    @@all.each do |team| 
+      if team.id == team_id 
         team_name = team.name
       end
     end
@@ -69,5 +69,4 @@ class Team
     end
     sorted
   end
-
 end

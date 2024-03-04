@@ -18,7 +18,19 @@ class StatTracker
     StatTracker.new(games, teams, game_teams)
   end
 
-  ### Game Statistics (7/7 Completed)
+  def find_team_name_by_id(team_id)
+    Team.find_team_name_by_id(team_id)
+  end
+
+  def average_goals_per_game
+    Game.average_goals_per_game
+  end
+
+  def count_of_teams
+    Team.count_of_teams
+  end
+
+  ### Game Statistics (7/8 Completed)
 
   def highest_total_score
     Game.highest_total_score
@@ -44,50 +56,54 @@ class StatTracker
     Game.count_of_games_by_season
   end
 
+  # Average Goals Per Game
+
   def average_goals_by_season
     Game.average_goals_by_season
   end
 
-  ### League Statistics (3/7 Completed)
+  ### League Statistics (5/7 Completed)
 
   def count_of_teams
     Team.count_of_teams
   end
 
-  # def best_offense
-  #   GameTeam.best_offense
-  # end
-
-  # def worst_offense
-  #   GameTeam.worst_offense
-  # end
+  # Best Offense
+  # Worst Offense
 
   def highest_scoring_visitor
     Team.highest_scoring_visitor
   end
 
-  # Highest Scoring Home Team
+  def highest_scoring_home_team 
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.max_by {|team_id, goals| goals}.first)
+  end
 
   def lowest_scoring_visitor
     Team.lowest_scoring_visitor
   end
 
-  # Lowest Scoring Home Team
+  def lowest_scoring_home_team
+    find_team_name_by_id(GameTeam.avg_scores_per_team_home.min_by {|team_id, goals| goals}.first)
+  end
 
-  ### Season Statistics (1/6 Completed)
+  ### Season Statistics (3/6 Completed)
 
-  # Winningest Coach
+  def winningest_coach(season_id)
+    GameTeam.winningest_coach(season_id)
+  end
 
-  # Worst Coach
+  def worst_coach(season_id)
+    GameTeam.worst_coach(season_id)
+  end
 
   # Most Accurate Team
-
   # Least Accurate Team
-
   # Most Tackles
 
   def fewest_tackles(season_id)
     team_id = GameTeam.fewest_tackles_by_season(season_id)
     Team.find_team_name_by_id(team_id)
-  end 
+  end
+
 end
