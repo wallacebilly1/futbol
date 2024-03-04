@@ -88,18 +88,18 @@ RSpec.describe GameTeam do
     end
 
     it 'has the shots to goals average for all teams' do
-      expect(GameTeam.pull_id_goals_shots_and_math).to be_a Hash
-      expected =  {"3"=>4.75, "6"=>3.04, "5"=>6.71, "30"=>5.75, "16"=>2.9, "26"=>2.6, "9"=>3.6}
+      expect(GameTeam.pull_id_goals_shots_and_math("20122013")).to be_a Hash
+      expected =  {"3"=>4.75, "6"=>3.04, "5"=>13.0}
 
-      expect(GameTeam.pull_id_goals_shots_and_math).to eq(expected)
+      expect(GameTeam.pull_id_goals_shots_and_math("20122013")).to eq(expected)
     end
 
     it 'has team id for most accurate team' do
-      expect(GameTeam.most_accurate_team).to eq("26") 
+      expect(GameTeam.most_accurate_team("20122013")).to eq("6") 
     end
 
     it 'has the team id for the least accurate team' do
-      expect(GameTeam.least_accurate_team).to eq("5")
+      expect(GameTeam.least_accurate_team("20122013")).to eq("5")
     end
   end
 

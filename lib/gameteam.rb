@@ -155,17 +155,24 @@ class GameTeam
     id_and_shots = Hash.new(0)
     
     @@all.each do |row|
-      if row.season_id == season_id
-        id_and_goals[row.team_id] += row.goals
+      if row.game_id[0..3] == season_id[0..3]
         id_and_shots[row.team_id] += row.shots
       end
     end
-
-    array_of_shots_to_goals =[]
-    result_hash = {}
-    id_and_shots.values.each_with_index do |value, index|
-      array_of_shots_to_goals << (value.to_f / id_and_goals.values[index]).round(2)
+    @@all.each do |row|
+      if row.game_id[0..3] == season_id[0..3]
+        id_and_goals[row.team_id] += row.goals
+      end
     end
+
+
+    array_of_shots_to_goals = []
+    result_hash = {}
+
+    id_and_shots.values.each_with_index do |value, index|
+      array_of_shots_to_goals << (value.to_f / (id_and_goals.values[index]))
+    end
+
     result_hash = id_and_shots.keys.zip(array_of_shots_to_goals).to_h
   end
 
