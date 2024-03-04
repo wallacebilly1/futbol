@@ -30,11 +30,43 @@ class Team
     team_name
   end
 
-  def all
+  def self.all
     @@all
   end
 
   def self.count_of_teams
     @@all.count
+  end  
+
+  def self.highest_scoring_visitor
+    generate_score_data.last[:team_name]
+  end
+
+  def self.lowest_scoring_visitor
+    generate_score_data.first[:team_name]
+  end
+
+  def self.generate_score_data
+    average_score_teams_list = Array.new
+    @@all.each do |team|
+      team_info = {
+        team_id: team.id,
+        team_name: team.name,
+        team_games_played: 0,
+        team_score_counter: 0,
+      }
+      Game.all.each do |game|
+        if team_info[:team_id].to_i == game.away_team_id
+          team_info[:team_games_played] += 1
+          team_info[:team_score_counter] += game.away_goals
+        end
+      end
+      team_info[:team_average_score_per_game] = (team_info[:team_score_counter].to_f / team_info[:team_games_played].to_f)
+      average_score_teams_list << team_info
+    end
+    sorted = average_score_teams_list.sort_by do |team|
+      team[:team_average_score_per_game]
+    end
+    sorted
   end
 end

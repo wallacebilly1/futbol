@@ -26,7 +26,7 @@ Re-DTR - 2/28
 ### Contributors:
 - Aurora - [LinkedIn](http://www.linkedin.com/in/aurorasanderson); [GitHub](https://github.com/AuroraTuring)
 - Billy - [LinkedIn](https://www.linkedin.com/in/wallacebilly1/); [GitHub](https://github.com/wallacebilly1)
-- Grant - [LinkedIn](https://www.linkedin.com/in/); [GitHub](grantdavis303/https://github.com/grantdavis303)
+- Grant - [LinkedIn](https://www.linkedin.com/in/); [GitHub](https://github.com/grantdavis303)
 - Steddy - [LinkedIn](https://www.linkedin.com/in/steddman-bell-350978139/); [GitHub](https://github.com/Steddy1Love)
 
 ### Retro

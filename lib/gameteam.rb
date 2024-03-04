@@ -141,29 +141,5 @@ class GameTeam
     end
     result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
-
-  # def self.best_offense
-  # @@game_teams.first.goals
-  # require 'pry'; binding.pry
-  # team_stat = {}
-  # start with an array of game teams and for each game team,
-  # @@game_teams.each do |gameteam|
-  
-  # if team_id key doesn't exist,
-  # add team_id as a key and its value will be the goals and games hash.
-  # team_stat[3] = {goals: (gameteam.goals), games: 1}
-  # else if team_id does exist
-  # add together goals and add 1 to games
-  #
-  # divide goals scored by number of games played for each team
-  # return team id(/name) with highest average score
-  # end
-  
-  
-  
-  
-  # def self.worst_offense
-  #   Name of the team with the lowest average number of goals scored per game across all seasons.
-  # end
   
 end
