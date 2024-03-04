@@ -86,6 +86,13 @@ class Game
     goals_count
   end
 
+  def self.average_goals_per_game
+    total_goals = @@all.map do |game|
+        (game.away_goals.to_f + game.home_goals)
+    end.sum
+    (total_goals / @@all.count).round(2)
+  end
+
   def self.average_goals_by_season
     goals_per_season = Hash.new(0)
 
@@ -96,13 +103,6 @@ class Game
       goals_per_season[season] = (goals_count[season].to_f / games_count[season]).round(2)
     end
     goals_per_season
-  end
-
-  def self.average_goals_per_game
-    total_goals = @@all.map do |game|
-        (game.away_goals.to_f + game.home_goals)
-    end.sum
-    (total_goals / @@all.count).round(2)
   end
 
   def self.highest_total_score

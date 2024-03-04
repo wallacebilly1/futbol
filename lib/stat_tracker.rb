@@ -22,10 +22,6 @@ class StatTracker
     Team.find_team_name_by_id(team_id)
   end
 
-  def average_goals_per_game
-    Game.average_goals_per_game
-  end
-
   def count_of_teams
     Team.count_of_teams
   end
@@ -57,6 +53,9 @@ class StatTracker
   end
 
   # Average Goals Per Game
+  def average_goals_per_game
+    Game.average_goals_per_game
+  end
 
   def average_goals_by_season
     Game.average_goals_by_season
