@@ -27,13 +27,7 @@ RSpec.describe StatTracker do
     end
   end
 
-#   it 'has the team by id' do
-#     expect(@stat_tracker.find_team_name_by_id('6')).to eq "FC Dallas"
-#   end
-
   describe '#methods' do
-  ### Game Statistics
-
     it "#highest_total_score" do
       expect(@stat_tracker.highest_total_score).to eq 11
     end
@@ -42,7 +36,11 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.lowest_total_score).to eq 0
     end
 
-    it '#percentage_home_wins' do
+    it 'has the team by id' do
+      expect(@stat_tracker.find_team_name_by_id('6')).to eq "FC Dallas"
+    end
+
+    it '#percentage_home_wins returns correct return value' do
       percentage_home_wins = @stat_tracker.percentage_home_wins
       expect(percentage_home_wins).to be_a Float
       expect(percentage_home_wins).to eq 0.44
@@ -78,14 +76,17 @@ RSpec.describe StatTracker do
       expect(goals_by_season.count).to eq 6
     end
 
-  ### League Statistics
-
     it "#count_of_teams" do
       expect(@stat_tracker.count_of_teams).to eq 32
     end
 
-    # Best Offense
-    # Worst Offense
+    it "#best_offense" do
+      expect(@stat_tracker.best_offense).to eq "FC Dallas"
+    end
+
+    it "#worst_offense" do
+      expect(@stat_tracker.worst_offense).to eq "Sporting Kansas City"
+    end
 
     it '#highest_scoring_visitor' do
       expect(@stat_tracker.highest_scoring_visitor).to be_a String
@@ -107,8 +108,6 @@ RSpec.describe StatTracker do
       expect(lowest_home_team).to eq("Sporting Kansas City")
     end
 
-  ### Season Statistics
-
     it '#winningest_coach' do
       expect(@stat_tracker.winningest_coach("20122013")).to eq "Claude Julien"
       expect(@stat_tracker.winningest_coach("20132014")).to eq "Darryl Sutter"
@@ -122,14 +121,30 @@ RSpec.describe StatTracker do
     # Most Accurate Team
     # Least Accurate Team
 
+    it '#fewest_tackles' do
+      expect(@stat_tracker.fewest_tackles("20122013")).to eq "Sporting Kansas City"
+      expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
+    end
+
     it '#most_tackles' do
       expect(@stat_tracker.most_tackles("20122013")).to eq "FC Dallas"
       expect(@stat_tracker.most_tackles("20132014")).to eq "FC Cincinnati"
     end
 
-    it '#fewest_tackles' do
-      expect(@stat_tracker.fewest_tackles("20122013")).to eq "Sporting Kansas City"
-      expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
+    it '#average_goals_per_game' do
+      goals_per_game_avg = @stat_tracker.average_goals_per_game
+      expect(goals_per_game_avg).to be_an Float
+      expect(goals_per_game_avg).to eq(4.22)
+    end
+
+    it '#highest_scoring_home_team' do
+      highest_home_team = @stat_tracker.highest_scoring_home_team
+      expect(highest_home_team).to eq("FC Dallas")
+    end
+
+    it '#lowest_scoring_home_team' do
+      lowest_home_team = @stat_tracker.lowest_scoring_home_team
+      expect(lowest_home_team).to eq("Sporting Kansas City")
     end
   end
 end
