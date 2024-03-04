@@ -153,7 +153,6 @@ class GameTeam
   def self.pull_id_goals_shots_and_math(season_id)
     id_and_goals = Hash.new(0)
     id_and_shots = Hash.new(0)
-    
     @@all.each do |row|
       if row.game_id[0..3] == season_id[0..3]
         id_and_shots[row.team_id] += row.shots
@@ -164,15 +163,11 @@ class GameTeam
         id_and_goals[row.team_id] += row.goals
       end
     end
-
-
     array_of_shots_to_goals = []
     result_hash = {}
-
     id_and_shots.values.each_with_index do |value, index|
       array_of_shots_to_goals << (value.to_f / (id_and_goals.values[index]))
     end
-
     result_hash = id_and_shots.keys.zip(array_of_shots_to_goals).to_h
   end
 
@@ -183,31 +178,6 @@ class GameTeam
   def self.least_accurate_team(season_id)
     pull_id_goals_shots_and_math(season_id).max_by {|team_id, shotsngoals| shotsngoals}.first
   end
-
-  # def self.best_offense
-  # @@game_teams.first.goals
-  # require 'pry'; binding.pry
-  # team_stat = {}
-  # start with an array of game teams and for each game team,
-  # @@game_teams.each do |gameteam|
-  
-  # if team_id key doesn't exist,
-  # add team_id as a key and its value will be the goals and games hash.
-  # team_stat[3] = {goals: (gameteam.goals), games: 1}
-  # else if team_id does exist
-  # add together goals and add 1 to games
-  #
-  # divide goals scored by number of games played for each team
-  # return team id(/name) with highest average score
-  # end
-  
-  
-  
-  
-  # def self.worst_offense
-  #   Name of the team with the lowest average number of goals scored per game across all seasons.
-  # end
-  
 
   def self.team_average_goals
     team_id_hash = @@all.group_by { |games| games.team_id }
