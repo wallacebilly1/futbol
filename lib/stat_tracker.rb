@@ -22,10 +22,6 @@ class StatTracker
     Team.find_team_name_by_id(team_id)
   end
 
-  def count_of_teams
-    Team.count_of_teams
-  end
-
   ### Game Statistics (7/8 Completed)
 
   def highest_total_score
