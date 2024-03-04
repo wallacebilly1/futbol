@@ -13,4 +13,7 @@ locations = {
 
 stat_tracker = StatTracker.from_csv(locations)
 
+p stat_tracker.most_tackles("20132014")
+p stat_tracker.most_tackles("20142015")
+
 require 'pry'; binding.pry
