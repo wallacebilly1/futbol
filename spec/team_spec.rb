@@ -30,6 +30,11 @@ RSpec.describe Team do
       expect(@teams.first.name).to eq "Atlanta United"
     end
 
+    it 'can return an array of all team objects' do
+        expect(Team.all).to all be_a Team
+        expect(Team.all.count).to eq 32
+    end
+
     it '#highest_scoring_visitor outputs correctly' do
       expect(Team.highest_scoring_visitor).to eq "FC Dallas"
     end

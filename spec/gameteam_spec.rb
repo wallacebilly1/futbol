@@ -52,7 +52,7 @@ RSpec.describe GameTeam do
     it 'can return an array of all game_team objects' do
         expect(GameTeam.all).to all be_a GameTeam
         expect(GameTeam.all.count).to eq 32
-      end
+    end
 
     it 'can take in a season ID and return a hash of team_ids and number of tackles for that season' do
       expected_20122013 = {"3" => 179, "5" => 117, "6" => 246}
