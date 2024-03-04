@@ -1,6 +1,5 @@
 require 'CSV'
 
-
 class GameTeam
   @@all = []
   attr_reader :game_id,
@@ -41,7 +40,7 @@ class GameTeam
     @@all
   end
 
-  def all
+  def self.all
     @@all
   end
 
