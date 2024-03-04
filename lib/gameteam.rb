@@ -142,21 +142,29 @@ class GameTeam
     result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
-  def pull_id_goals_shots
+  def self.pull_id_goals_shots_and_math
     id_and_goals = Hash.new(0)
-    id_and_goals = Hash.new(0)
+    id_and_shots = Hash.new(0)
     
     @@all.each do |row|
       id_and_goals[row.team_id] += row.goals
       id_and_shots[row.team_id] += row.shots
     end
+
+    array_of_shots_to_goals =[]
+    result_hash = {}
+    id_and_shots.values.each_with_index do |value, index|
+      array_of_shots_to_goals << (value.to_f / id_and_goals.values[index]).round(2)
+    end
+    result_hash = id_and_shots.keys.zip(array_of_shots_to_goals).to_h
   end
+
   def self.most_accurate_team
-   
+    pull_id_goals_shots_and_math.min_by {|team_id, shotsngoals| shotsngoals}.first
   end
 
   def self.least_accurate_team
-
+    pull_id_goals_shots_and_math.max_by {|team_id, shotsngoals| shotsngoals}.first
   end
 
   # def self.best_offense

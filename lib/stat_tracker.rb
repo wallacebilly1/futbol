@@ -90,4 +90,12 @@ class StatTracker
   def worst_coach(season_id)
     GameTeam.worst_coach(season_id)
   end
+
+  def most_accurate_team
+    Team.find_team_name_by_id(GameTeam.most_accurate_team)
+  end
+
+  def least_accurate_team
+    Team.find_team_name_by_id(GameTeam.least_accurate_team)
+  end
 end

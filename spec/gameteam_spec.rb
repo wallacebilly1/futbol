@@ -86,8 +86,23 @@ RSpec.describe GameTeam do
       
       expect(GameTeam.avg_scores_per_team_home).to eq expected
     end
+
+    it 'has the shots to goals average for all teams' do
+      expect(GameTeam.pull_id_goals_shots_and_math).to be_a Hash
+      expected =  {"3"=>4.75, "6"=>3.04, "5"=>6.71, "30"=>5.75, "16"=>2.9, "26"=>2.6, "9"=>3.6}
+
+      expect(GameTeam.pull_id_goals_shots_and_math).to eq(expected)
+    end
+
+    it 'has team id for most accurate team' do
+      expect(GameTeam.most_accurate_team).to eq("26") 
+    end
+
+    it 'has the team id for the least accurate team' do
+      expect(GameTeam.least_accurate_team).to eq("5")
+    end
   end
-end
+
   # it "can check for team with the highest average number of goals scored per game across all seasons" do
   #   expect(GameTeam.best_offense).to eq("Reign FC")
   # end
@@ -95,3 +110,4 @@ end
   # it "can check for team with the lowest average number of goals scored per game across all seasons" do
   #   expect(GameTeam.worst_offense).to eq("Utah Royals FC")
   # end
+end

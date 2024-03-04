@@ -103,6 +103,14 @@ RSpec.describe StatTracker do
     expect(lowest_home_team).to eq("Sporting Kansas City")
   end
 
+  it '#most accurate team' do
+    expect(@stat_tracker.most_accurate_team).to eq "FC Cincinnati"
+  end
+
+  it '#least accurate team' do
+    expect(@stat_tracker.least_accurate_team).to eq "Sporting Kansas City"
+  end
+
   # it "#best_offense" do
   #   expect(@stat_tracker.best_offense).to eq "Reign FC"
   # end
