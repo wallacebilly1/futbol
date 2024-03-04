@@ -118,6 +118,19 @@ RSpec.describe StatTracker do
       expect(@stat_tracker.worst_coach("20162017")).to eq "Guy Boucher"
     end
 
+    # Most Accurate Team
+    # Least Accurate Team
+
+    it '#fewest_tackles' do
+      expect(@stat_tracker.fewest_tackles("20122013")).to eq "Sporting Kansas City"
+      expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
+    end
+
+    it '#most_tackles' do
+      expect(@stat_tracker.most_tackles("20122013")).to eq "FC Dallas"
+      expect(@stat_tracker.most_tackles("20132014")).to eq "FC Cincinnati"
+    end
+
     it '#average_goals_per_game' do
       goals_per_game_avg = @stat_tracker.average_goals_per_game
       expect(goals_per_game_avg).to be_an Float

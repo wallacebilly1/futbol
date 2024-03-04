@@ -65,6 +65,15 @@ class GameTeam
     GameTeam.fewest_tackles(tackles_per_team_hash)
   end
 
+  def self.most_tackles(tackles_per_team_hash)
+    tackles_per_team_hash.max_by {|team_id, tackles| tackles}.first
+  end
+
+  def self.most_tackles_by_season(season_id)
+    tackles_per_team_hash = GameTeam.tackles_per_team(season_id)
+    GameTeam.most_tackles(tackles_per_team_hash)
+  end
+
   def self.winningest_coach(season_id)
     games_by_coach = Hash.new(0)
     wins_by_coach = Hash.new(0)
