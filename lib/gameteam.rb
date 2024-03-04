@@ -112,7 +112,7 @@ class GameTeam
     win_percent_by_coach = Hash.new
 
     games_by_coach.each do |key, value|
-      if wins_by_coach[key].nil? 
+      if wins_by_coach[key].nil?
         win_percent_by_coach[key] = nil
       else
         win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
@@ -124,7 +124,7 @@ class GameTeam
       value
     end.first
   end
-  
+
   def self.avg_scores_per_team_home
     team_scores = Hash.new(0)
     gameteam_counter = Hash.new(0)
@@ -208,4 +208,27 @@ class GameTeam
   #   Name of the team with the lowest average number of goals scored per game across all seasons.
   # end
   
+
+  def self.team_average_goals
+    team_id_hash = @@all.group_by { |games| games.team_id }
+    team_id_hash.each do |teamid, games|
+      sum = games.sum { |games| games.goals }
+      count = games.count
+      team_id_hash[teamid] = (sum / count.to_f).round(2)
+    end
+    team_id_hash
+  end
+
+  def self.best_offense
+    bestid = team_average_goals.max_by { |_, average| average }.first
+    teams = Team.create_from_csv('./data/teams.csv')
+    best_offense = teams.find { |team| team.id == bestid }.name
+  end
+
+  def self.worst_offense
+    worstid = team_average_goals.min_by { |_, average| average }.first
+    teams = Team.create_from_csv('./data/teams.csv')
+    worst_offense = teams.find { |team| team.id == worstid }.name
+  end
+
 end

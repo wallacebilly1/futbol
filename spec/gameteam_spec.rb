@@ -81,10 +81,18 @@ RSpec.describe GameTeam do
     end
 
     it 'has the average scores per home team' do
-      expect(GameTeam.avg_scores_per_team_home).to be_a Hash 
+      expect(GameTeam.avg_scores_per_team_home).to be_a Hash
       expected = {"6"=>2.75, "3"=>1.50, "5"=>0.67, "16"=>2.33, "30"=>1.50, "9"=>2.50}
-      
+
       expect(GameTeam.avg_scores_per_team_home).to eq expected
+    end
+
+    it "can check for team with the highest average number of goals scored per game across all seasons" do
+      expect(GameTeam.best_offense).to eq("FC Dallas")
+    end
+
+    it "can check for team with the lowest average number of goals scored per game across all seasons" do
+      expect(GameTeam.worst_offense).to eq("Sporting Kansas City")
     end
 
     it 'has the shots to goals average for all teams' do
@@ -103,11 +111,4 @@ RSpec.describe GameTeam do
     end
   end
 
-  # it "can check for team with the highest average number of goals scored per game across all seasons" do
-  #   expect(GameTeam.best_offense).to eq("Reign FC")
-  # end
-
-  # it "can check for team with the lowest average number of goals scored per game across all seasons" do
-  #   expect(GameTeam.worst_offense).to eq("Utah Royals FC")
-  # end
 end
