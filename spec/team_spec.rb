@@ -36,7 +36,7 @@ RSpec.describe Team do
     end
 
     it "can count the total number of teams" do
-      expect(Team.count_of_teams).to eq(32)
+      expect(Team.count_of_teams).to eq(192)
     end
   end
 
