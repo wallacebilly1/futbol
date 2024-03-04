@@ -27,8 +27,11 @@ RSpec.describe StatTracker do
     end
   end
 
-  describe '#methods' do
+#   it 'has the team by id' do
+#     expect(@stat_tracker.find_team_name_by_id('6')).to eq "FC Dallas"
+#   end
 
+  describe '#methods' do
   ### Game Statistics
 
     it "#highest_total_score" do
@@ -63,7 +66,6 @@ RSpec.describe StatTracker do
       expect(games_by_season.count).to eq 6
     end
 
-    # Average Goals Per Game
     it '#average_goals_per_game' do
       goals_per_game_avg = @stat_tracker.average_goals_per_game
       expect(goals_per_game_avg).to be_an Float
@@ -127,45 +129,3 @@ RSpec.describe StatTracker do
     end
   end
 end
-
-
-
-
-
-
-
-#   it "#highest_total_score" do
-#     expect(@stat_tracker.highest_total_score).to eq 9
-#   end
-
-#   it "#lowest_total_score" do
-#     expect(@stat_tracker.lowest_total_score).to eq 1
-#   end
-
-#   it "#count_of_teams" do
-#     expect(@stat_tracker.count_of_teams).to eq 32
-#   end
-
-#   it 'has the team by id' do
-#     expect(@stat_tracker.find_team_name_by_id('6')).to eq "FC Dallas"
-#   end
-
-#   it '#percentage_home_wins returns correct return value' do
-#     percentage_home_wins = @stat_tracker.percentage_home_wins
-#     expect(percentage_home_wins).to be_a Float
-#     expect(percentage_home_wins).to eq 0.48
-#   end
-
-#   it '#percentage_visitor_wins returns correct return value' do
-#     percentage_visitor_wins = @stat_tracker.percentage_visitor_wins
-#     expect(percentage_visitor_wins).to be_a Float
-#     expect(percentage_visitor_wins).to eq 0.29
-#   end
-
-#   it '#percentage_ties returns correct return value' do
-#     percentage_ties = @stat_tracker.percentage_ties
-#     expect(percentage_ties).to be_a Float
-#     expect(percentage_ties).to eq 0.23
-#   end
-
-# end
