@@ -77,6 +77,16 @@ RSpec.describe StatTracker do
     expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
   end
 
+  it '#winningest_coach' do
+    expect(@stat_tracker.winningest_coach("20122013")).to eq "Claude Julien"
+    expect(@stat_tracker.winningest_coach("20132014")).to eq "Darryl Sutter"
+  end
+
+  it '#worst_coach' do
+    expect(@stat_tracker.worst_coach("20142015")).to eq "Mike Yeo"
+    expect(@stat_tracker.worst_coach("20162017")).to eq "Guy Boucher"
+  end
+
   it '#average_goals_per_game' do
     goals_per_game_avg = @stat_tracker.average_goals_per_game
     expect(goals_per_game_avg).to be_an Float
