@@ -154,11 +154,16 @@ class GameTeam
     best_offense = teams.find { |team| team.id == bestid }.name
   end
 
-
-
-
-  # def self.worst_offense
-  #   Name of the team with the lowest average number of goals scored per game across all seasons.
-  # end
+  def self.worst_offense
+    team_id_hash = @@all.group_by { |games| games.team_id }
+    team_id_hash.each do |teamid, games|
+      sum = games.sum { |games| games.goals }
+      count = games.count
+      team_id_hash[teamid] = (sum / count.to_f).round(2)
+    end
+    worstid = team_id_hash.min_by { |_, average| average }.first
+    teams = Team.create_from_csv('./data/teams.csv')
+    worst_offense = teams.find { |team| team.id == worstid }.name
+  end
 
 end
