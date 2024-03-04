@@ -147,4 +147,35 @@ RSpec.describe StatTracker do
       expect(lowest_home_team).to eq("Sporting Kansas City")
     end
   end
+  it '#average_goals_per_game' do
+    goals_per_game_avg = @stat_tracker.average_goals_per_game
+    expect(goals_per_game_avg).to be_an Float
+    expect(goals_per_game_avg).to eq(4.22)
+  end
+
+  it '#highest_scoring_home_team' do
+    highest_home_team = @stat_tracker.highest_scoring_home_team
+    expect(highest_home_team).to eq("FC Dallas")
+  end
+
+  it '#lowest_scoring_home_team' do
+    lowest_home_team = @stat_tracker.lowest_scoring_home_team
+    expect(lowest_home_team).to eq("Sporting Kansas City")
+  end
+
+  it '#most accurate team' do
+    expect(@stat_tracker.most_accurate_team("20122013")).to eq "FC Dallas"
+  end
+
+  it '#least accurate team' do
+    expect(@stat_tracker.least_accurate_team("20122013")).to eq "Sporting Kansas City"
+  end
+
+  # it "#best_offense" do
+  #   expect(@stat_tracker.best_offense).to eq "Reign FC"
+  # end
+
+  # it "#worst_offense" do
+  #   expect(@stat_tracker.worst_offense).to eq "Utah Royals FC"
+  # end
 end

@@ -151,6 +151,43 @@ class GameTeam
     result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
+  def self.pulls_team_id_max_score_home
+    avg_scores_per_team_home.max_by {|team_id, goals| goals}.first
+  end
+  
+  def self.pulls_team_id_min_score_home
+    avg_scores_per_team_home.min_by {|team_id, goals| goals}.first
+  end
+
+  def self.pull_id_goals_shots_and_math(season_id)
+    id_and_goals = Hash.new(0)
+    id_and_shots = Hash.new(0)
+    @@all.each do |row|
+      if row.game_id[0..3] == season_id[0..3]
+        id_and_shots[row.team_id] += row.shots
+      end
+    end
+    @@all.each do |row|
+      if row.game_id[0..3] == season_id[0..3]
+        id_and_goals[row.team_id] += row.goals
+      end
+    end
+    array_of_shots_to_goals = []
+    result_hash = {}
+    id_and_shots.values.each_with_index do |value, index|
+      array_of_shots_to_goals << (value.to_f / (id_and_goals.values[index]))
+    end
+    result_hash = id_and_shots.keys.zip(array_of_shots_to_goals).to_h
+  end
+
+  def self.most_accurate_team(season_id)
+    pull_id_goals_shots_and_math(season_id).min_by {|team_id, shotsngoals| shotsngoals}.first
+  end
+
+  def self.least_accurate_team(season_id)
+    pull_id_goals_shots_and_math(season_id).max_by {|team_id, shotsngoals| shotsngoals}.first
+  end
+
   def self.team_average_goals
     team_id_hash = @@all.group_by { |games| games.team_id }
     team_id_hash.each do |teamid, games|
