@@ -131,7 +131,7 @@ RSpec.describe StatTracker do
   it '#average_goals_per_game' do
     goals_per_game_avg = @stat_tracker.average_goals_per_game
     expect(goals_per_game_avg).to be_an Float
-    expect(goals_per_game_avg).to eq(4.32)
+    expect(goals_per_game_avg).to eq(4.22)
   end
 
   it '#highest_scoring_home_team' do

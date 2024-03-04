@@ -70,7 +70,7 @@ class StatTracker
   end
 
   def highest_scoring_home_team 
-    find_team_name_by_id(GameTeam.avg_scores_per_team_home.max_by {|team_id, goals| goals}.first)
+    find_team_name_by_id(GameTeam.pulls_team_id_max_score_home)
   end
 
   def lowest_scoring_visitor
@@ -78,7 +78,7 @@ class StatTracker
   end
 
   def lowest_scoring_home_team
-    find_team_name_by_id(GameTeam.avg_scores_per_team_home.min_by {|team_id, goals| goals}.first)
+    find_team_name_by_id(GameTeam.pulls_team_id_min_score_home)
   end
 
   ### Season Statistics (3/6 Completed)
@@ -98,9 +98,7 @@ class StatTracker
   def least_accurate_team
     Team.find_team_name_by_id(GameTeam.least_accurate_team)
   end
-end
-  # Most Accurate Team
-  # Least Accurate Team
+
   # Most Tackles
 
   def fewest_tackles(season_id)

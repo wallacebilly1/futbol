@@ -142,6 +142,14 @@ class GameTeam
     result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
+  def self.pulls_team_id_max_score_home
+    avg_scores_per_team_home.max_by {|team_id, goals| goals}.first
+  end
+  
+  def self.pulls_team_id_min_score_home
+    avg_scores_per_team_home.min_by {|team_id, goals| goals}.first
+  end
+
   def self.pull_id_goals_shots_and_math
     id_and_goals = Hash.new(0)
     id_and_shots = Hash.new(0)
