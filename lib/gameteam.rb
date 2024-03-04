@@ -1,5 +1,6 @@
 require 'CSV'
 
+
 class GameTeam
   @@all = []
   attr_reader :game_id,
@@ -40,6 +41,10 @@ class GameTeam
     @@all
   end
 
+  def all
+    @@all
+  end
+
   def self.tackles_per_team(season_id)
     tackles_per_team = Hash.new(0)
 
@@ -58,6 +63,83 @@ class GameTeam
   def self.fewest_tackles_by_season(season_id)
     tackles_per_team_hash = GameTeam.tackles_per_team(season_id)
     GameTeam.fewest_tackles(tackles_per_team_hash)
+  end
+
+  def self.winningest_coach(season_id)
+    games_by_coach = Hash.new(0)
+    wins_by_coach = Hash.new(0)
+
+    @@all.each do |row|
+      if season_id[0..3] == row.game_id[0..3]
+        games_by_coach[row.head_coach] += 1
+      end
+
+      if row.result == "WIN" && season_id[0..3] == row.game_id[0..3]
+        wins_by_coach[row.head_coach] += 1
+      end
+    end
+
+    win_percent_by_coach = Hash.new
+
+    games_by_coach.each do |key, value|
+      if wins_by_coach[key].nil? || wins_by_coach[key] == 0
+        win_percent_by_coach[key] = nil
+      else
+        win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
+      end
+      win_percent_by_coach
+    end
+
+    win_percent_by_coach.compact.max_by do |key, value|
+      value
+    end.first
+  end
+
+  def self.worst_coach(season_id)
+    games_by_coach = Hash.new(0)
+    wins_by_coach = Hash.new(0)
+
+    @@all.each do |row|
+      if season_id[0..3] == row.game_id[0..3]
+        games_by_coach[row.head_coach] += 1
+      end
+
+      if row.result == "WIN" && season_id[0..3] == row.game_id[0..3]
+        wins_by_coach[row.head_coach] += 1
+      end
+    end
+
+    win_percent_by_coach = Hash.new
+
+    games_by_coach.each do |key, value|
+      if wins_by_coach[key].nil?
+        win_percent_by_coach[key] = nil
+      else
+        win_percent_by_coach[key] = wins_by_coach[key] / value.to_f
+      end
+      win_percent_by_coach
+    end
+
+    win_percent_by_coach.compact.min_by do |key, value|
+      value
+    end.first
+  end
+
+  def self.avg_scores_per_team_home
+    team_scores = Hash.new(0)
+    gameteam_counter = Hash.new(0)
+    @@all.each do |gameteam|
+      if gameteam.hoa == "home"
+        team_scores[gameteam.team_id] += gameteam.goals
+        gameteam_counter[gameteam.team_id] += 1
+      end
+    end
+    array_of_scores_to_games = []
+    result_hash = {}
+    team_scores.values.each_with_index do |value, index|
+      array_of_scores_to_games << (value.to_f / gameteam_counter.values[index]).round(2)
+    end
+    result_hash = team_scores.keys.zip(array_of_scores_to_games).to_h
   end
 
   def self.best_offense

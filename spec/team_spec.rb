@@ -39,4 +39,5 @@ RSpec.describe Team do
       expect(Team.count_of_teams).to eq(32)
     end
   end
+
 end

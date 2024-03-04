@@ -1,4 +1,4 @@
-require './spec/spec_helper'
+require 'spec_helper'
 
 RSpec.describe StatTracker do
 
@@ -21,9 +21,9 @@ RSpec.describe StatTracker do
   end
 
   it 'initializes data from a CSV file' do
-    expect(@stat_tracker.games.first).to be_a Game
-    expect(@stat_tracker.teams.first).to be_a Team
-    expect(@stat_tracker.game_teams.first).to be_a GameTeam
+    expect(@stat_tracker.games.first).to be_an_instance_of Game
+    expect(@stat_tracker.teams.first).to be_an_instance_of Team
+    expect(@stat_tracker.game_teams.first).to be_an_instance_of GameTeam
   end
 
   it "#highest_total_score" do
@@ -36,6 +36,10 @@ RSpec.describe StatTracker do
 
   it "#count_of_teams" do
     expect(@stat_tracker.count_of_teams).to eq 32
+  end
+
+  it 'has the team by id' do
+    expect(@stat_tracker.find_team_name_by_id('6')).to eq "FC Dallas"
   end
 
   it '#percentage_home_wins returns correct return value' do
@@ -71,6 +75,32 @@ RSpec.describe StatTracker do
   it '#fewest_tackles' do
     expect(@stat_tracker.fewest_tackles("20122013")).to eq "Sporting Kansas City"
     expect(@stat_tracker.fewest_tackles("20132014")).to eq "New England Revolution"
+  end
+
+  it '#winningest_coach' do
+    expect(@stat_tracker.winningest_coach("20122013")).to eq "Claude Julien"
+    expect(@stat_tracker.winningest_coach("20132014")).to eq "Darryl Sutter"
+  end
+
+  it '#worst_coach' do
+    expect(@stat_tracker.worst_coach("20142015")).to eq "Mike Yeo"
+    expect(@stat_tracker.worst_coach("20162017")).to eq "Guy Boucher"
+  end
+
+  it '#average_goals_per_game' do
+    goals_per_game_avg = @stat_tracker.average_goals_per_game
+    expect(goals_per_game_avg).to be_an Float
+    expect(goals_per_game_avg).to eq(4.32)
+  end
+
+  it '#highest_scoring_home_team' do
+    highest_home_team = @stat_tracker.highest_scoring_home_team
+    expect(highest_home_team).to eq("FC Dallas")
+  end
+
+  it '#lowest_scoring_home_team' do
+    lowest_home_team = @stat_tracker.lowest_scoring_home_team
+    expect(lowest_home_team).to eq("Sporting Kansas City")
   end
 
   # it "#best_offense" do
